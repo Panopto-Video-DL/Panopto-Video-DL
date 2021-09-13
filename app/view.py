@@ -44,5 +44,5 @@ class View:
         self.state_label = Label(self.__root)
         self.state_label.place(relx=0.107, rely=0.893)
 
-    def update_idletasks(self):
+    def update_idletasks(self) -> None:
         self.__root.update_idletasks()

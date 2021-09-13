@@ -7,6 +7,7 @@ Download video from Panopto!
 - [FFmpeg](https://ffmpeg.org/download.html)   
 	**Note**: FFmpeg **must** be added in the system PATH  
 - [Panopto-Video-DL-browser](https://github.com/Panopto-Video-DL/Panopto-Video-DL-browser)  
+- Python >= 3.8
 
 ## Download  
 
