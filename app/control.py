@@ -3,7 +3,7 @@ from tkinter import Tk
 from tkinter import Entry, StringVar
 from tkinter import messagebox, filedialog
 from PanoptoDownloader import PanoptoDownloader
-from PanoptoDownloader.exceptions import RegexNotMach
+from PanoptoDownloader.exceptions import *
 
 from app.view import View
 
@@ -61,7 +61,7 @@ class App:
         self.__view.update_idletasks()
 
     def _error_hook(self, args, /) -> None:
-        if isinstance(args.exc_type, RegexNotMach):
+        if isinstance(args.exc_type, RegexNotMatch):
             messagebox.showerror('Error', 'URL not correct. Paste the automatically copied link from Browser Extension')
         else:
             messagebox.showerror('Error', str(args.exc_value))
