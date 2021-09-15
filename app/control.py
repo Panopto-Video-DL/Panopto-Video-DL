@@ -14,13 +14,15 @@ class App:
 
     def __init__(self):
         self.__root = Tk()
+        self.__root.protocol('WM_DELETE_WINDOW', self._on_closing_window)
 
         self.__view = View(self.__root)
-
         self.__view.filepath_button.config(command=lambda: self._get_directory(self.__view.string))
         self.__view.paste_button.config(command=lambda: self._paste(self.__view.url_entry))
-
         self.__view.download_button.config(command=self._start)
+
+        # Variables
+        self.__thread = None
 
         self.__root.mainloop()
 
@@ -48,7 +50,8 @@ class App:
         self.__view.download_button.config(state='disabled')
         self.__view.state_label.config(text='Downloading...')
 
-        threading.Thread(target=self._download, args=(url, filepath)).start()
+        self.__thread = threading.Thread(target=self._download, args=(url, filepath))
+        self.__thread.start()
 
     def _download(self, url, filepath):
         try:
@@ -61,7 +64,8 @@ class App:
                                  'URL not correct.\nPaste the automatically copied link from Browser Extension')
         except Exception as e:
             messagebox.showerror('Error', str(e))
-        self._reset()
+        finally:
+            self._reset()
 
     def _callback(self, progress: int) -> None:
         self.__view.progressbar['value'] = progress
@@ -72,6 +76,12 @@ class App:
         self.__view.download_button.config(state='normal')
         self.__view.state_label.config(text='')
         self.__view.update_idletasks()
+
+    def _on_closing_window(self):
+        if self.__thread is not None and self.__thread.is_alive():
+            messagebox.showwarning('Warning', 'The download is still in progress. Unable to close')
+        else:
+            self.__root.destroy()
 
     @staticmethod
     def _get_directory(element: StringVar) -> None:
