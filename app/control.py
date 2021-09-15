@@ -1,8 +1,10 @@
-import os.path
+import os
+import threading
 from tkinter import Tk
 from tkinter import Entry, StringVar
 from tkinter import messagebox, filedialog
-from PanoptoDownloader import PanoptoDownloader
+
+import PanoptoDownloader
 from PanoptoDownloader.exceptions import *
 
 from app.view import View
@@ -40,32 +42,36 @@ class App:
             messagebox.showerror('Error', 'Folder not exist')
             return
 
+        if os.path.exists(filepath):
+            os.remove(filepath)
+
         self.__view.download_button.config(state='disabled')
         self.__view.state_label.config(text='Downloading...')
 
-        PanoptoDownloader().download(url, filepath, self._callback, self._error_hook)
+        threading.Thread(target=self._download, args=(url, filepath)).start()
+
+    def _download(self, url, filepath):
+        try:
+            PanoptoDownloader.download(url, filepath, self._callback)
+
+            self.__view.state_label.config(text='Done')
+            messagebox.showinfo('Completed', 'Download completed')
+        except RegexNotMatch:
+            messagebox.showerror('Error',
+                                 'URL not correct.\nPaste the automatically copied link from Browser Extension')
+        except Exception as e:
+            messagebox.showerror('Error', str(e))
+        self._reset()
 
     def _callback(self, progress: int) -> None:
         self.__view.progressbar['value'] = progress
         self.__view.update_idletasks()
 
-        if progress >= 100:
-            self.__view.state_label.config(text='Done')
-            messagebox.showinfo('Completed', 'Download completed')
-            self._done()
-
-    def _done(self) -> None:
+    def _reset(self) -> None:
         self.__view.progressbar['value'] = 0
         self.__view.download_button.config(state='normal')
         self.__view.state_label.config(text='')
         self.__view.update_idletasks()
-
-    def _error_hook(self, args, /) -> None:
-        if isinstance(args.exc_type, RegexNotMatch):
-            messagebox.showerror('Error', 'URL not correct. Paste the automatically copied link from Browser Extension')
-        else:
-            messagebox.showerror('Error', str(args.exc_value))
-        self._done()
 
     @staticmethod
     def _get_directory(element: StringVar) -> None:
