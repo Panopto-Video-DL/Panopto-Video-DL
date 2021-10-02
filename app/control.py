@@ -5,6 +5,7 @@ from tkinter import Entry, StringVar
 from tkinter import messagebox, filedialog
 
 import PanoptoDownloader
+from PanoptoDownloader import SUPPORTED_FORMATS
 from PanoptoDownloader.exceptions import *
 
 from app.view import View
@@ -85,12 +86,7 @@ class App:
 
     @staticmethod
     def _get_directory(element: StringVar) -> None:
-        filetypes = [
-            ('MP4', '*.mp4'),
-            ('MKV', '*.mkv'),
-            ('FLV', '*.flv'),
-            ('AVI', '*.avi')
-        ]
+        filetypes = [(f[1:].upper(), f'*{f}') for f in SUPPORTED_FORMATS]
 
         filepath = filedialog.asksaveasfilename(filetypes=filetypes, defaultextension='*.*')
         if filepath:

@@ -11,11 +11,28 @@ Download video from Panopto!
 
 ## Download  
 
-Download last release: [Panopto-Video-DL](https://github.com/Panopto-Video-DL/Panopto-Video-DL/releases) _(No installation needed)_  
+### Simple
+
+Download the latest release: [Panopto-Video-DL](https://github.com/Panopto-Video-DL/Panopto-Video-DL/releases) _(No installation needed)_    
+
+### Advanced
+
+1. Clone this repository  
+```bach
+> git clone https://github.com/Panopto-Video-DL/Panopto-Video-DL.git
+```
+2. Enter the folder  
+```bach
+> cd Panopto-Video-DL
+```
+ 3. Install the requirements  
+```bach
+> pip install -r requirements.txt
+```
 
 ## Usage  
 
-- Open the _Panopto-Video-DL_  
+- Open _Panopto-Video-DL_  
 - Paste the link automatically copied from [Panopto-Video-DL-browser](https://github.com/Panopto-Video-DL/Panopto-Video-DL-browser)  
 - Set the destination folder  
-- Wait until the download finishes  
+- Wait for the download to finish  
