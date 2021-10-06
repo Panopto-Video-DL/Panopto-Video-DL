@@ -42,7 +42,7 @@ class App:
             messagebox.showerror('Error', 'Cannot be a folder')
             return
         if not os.path.isdir(os.path.split(filepath)[0]):
-            messagebox.showerror('Error', 'Folder not exist')
+            messagebox.showerror('Error', 'Folder does not exist')
             return
 
         if os.path.exists(filepath):
