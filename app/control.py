@@ -88,7 +88,7 @@ class App:
     def _get_directory(element: StringVar) -> None:
         filetypes = [(f[1:].upper(), f'*{f}') for f in SUPPORTED_FORMATS]
 
-        filepath = filedialog.asksaveasfilename(filetypes=filetypes, defaultextension='*.*')
+        filepath = filedialog.asksaveasfilename(filetypes=filetypes, defaultextension='')
         if filepath:
             element.set(filepath)
 
