@@ -1,5 +1,6 @@
 import os
 import threading
+import webbrowser
 from tkinter import Tk
 from tkinter import Entry, StringVar
 from tkinter import messagebox, filedialog
@@ -8,6 +9,7 @@ import PanoptoDownloader
 from PanoptoDownloader import SUPPORTED_FORMATS
 from PanoptoDownloader.exceptions import *
 
+import app.utils as utils
 from app.view import View
 
 
@@ -25,6 +27,7 @@ class App:
         # Variables
         self.__thread = None
 
+        threading.Thread(target=self._check_update).start()
         self.__root.mainloop()
 
     def _start(self) -> None:
@@ -96,3 +99,11 @@ class App:
     def _paste(element: Entry) -> None:
         element.select_range(0, 'end')
         element.event_generate('<<Paste>>')
+
+    @staticmethod
+    def _check_update():
+        update = utils.get_release_update()
+        if update is not None:
+            body = 'Version: ' + update.get('tag') + '\nChangelog:\n' + update.get('body') + '\n\nDownload it?'
+            if messagebox.askyesno('New Update!', body):
+                webbrowser.open(update.get('url'))
