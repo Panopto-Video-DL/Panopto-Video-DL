@@ -4,14 +4,14 @@
 
 Download video from Panopto!  
 
-## Prerequisites  
+## Prerequisites
 
-- [FFmpeg](https://ffmpeg.org/download.html)   
-	**Note**: FFmpeg **must** be added in the system PATH  
-- [Panopto-Video-DL-browser](https://github.com/Panopto-Video-DL/Panopto-Video-DL-browser)  
+- [Panopto-Video-DL-browser](https://github.com/Panopto-Video-DL/Panopto-Video-DL-browser)
+- [FFmpeg](https://ffmpeg.org/download.html)  
+	**Note**: FFmpeg **must** be added in the system PATH
 - Python >= 3.7
 
-## Download  
+## Download
 
 ### Simple
 
@@ -27,12 +27,16 @@ git clone https://github.com/Panopto-Video-DL/Panopto-Video-DL.git
 ```shell
 cd Panopto-Video-DL
 ```
- 3. Install the requirements  
+3. Install the requirements  
 ```shell
 pip install -r requirements.txt
 ```
+4. Open
+```shell
+python main.py
+```
 
-## Usage  
+## Usage
 
 - Open _Panopto-Video-DL_  
 - Paste the link automatically copied from [Panopto-Video-DL-browser](https://github.com/Panopto-Video-DL/Panopto-Video-DL-browser)  
