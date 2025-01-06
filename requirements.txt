@@ -1,2 +1,2 @@
 requests~=2.27.1
-git+https://github.com/Panopto-Video-DL/Panopto-Video-DL-lib@v1.4.2#egg=PanoptoDownloader
+git+https://github.com/Panopto-Video-DL/Panopto-Video-DL-lib@v1.4.3#egg=PanoptoDownloader
