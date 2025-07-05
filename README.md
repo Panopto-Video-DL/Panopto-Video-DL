@@ -7,9 +7,9 @@ Download video from Panopto!
 ## Prerequisites  
 
 - [Panopto-Video-DL-browser](https://github.com/Panopto-Video-DL/Panopto-Video-DL-browser)
-- [FFmpeg](https://ffmpeg.org/download.html) (Optional. See [below](#ffmpeg))  
+- [FFmpeg](https://ffmpeg.org/download.html) (Recommended. See [below](#ffmpeg))  
     **Note**: FFmpeg **must** be added in the _system PATH_  
-- Python >= 3.7
+- Python 3.9
 
 ## Download
 
@@ -23,11 +23,21 @@ Download the latest release: [Panopto-Video-DL](https://github.com/Panopto-Video
 ```shell
 git clone https://github.com/Panopto-Video-DL/Panopto-Video-DL.git Panopto-Video-DL && cd Panopto-Video-DL
 ```
-2. Install the requirements  
+2. This project use [Mise](https://mise.jdx.dev) to ensure tool version management
 ```shell
-pip install -r requirements.txt
+mise i
+python --version # verify python version 3.9
 ```
-3. Open
+3. Create a virtual environment
+```shell
+python -m venv .venv
+source .venv/bin/activate
+```
+4. Install requirements
+```shell
+python -m pip install -r requirements.txt
+```
+5. Open
 ```shell
 python main.py
 ```
